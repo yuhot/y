@@ -8,8 +8,6 @@ import pytz, datetime, pafy, time, timeit, random, sys, ast, re, os, json, subpr
 from datetime import timedelta, date
 from datetime import datetime
 from bs4 import BeautifulSoup
-from googletrans import Translator
-import youtube_dl
 
 aditmadzs = LineClient()
 #aditmadzs = LineClient(authToken='TOKEN LU')
@@ -49,10 +47,10 @@ sw.log("Channel Access Token : " + str(channel3.channelAccessToken))
 
 poll = LinePoll(aditmadzs)
 call = aditmadzs
-creator = ["u4862fe4b182b2fd194a3108e2f3662e8","u6fdd724f8da20acc79d07a56a05fed7b"]
-owner = ["u4862fe4b182b2fd194a3108e2f3662e8","u6fdd724f8da20acc79d07a56a05fed7b"]
-admin = ["u4862fe4b182b2fd194a3108e2f3662e8","u6fdd724f8da20acc79d07a56a05fed7b"]
-staff = ["u4862fe4b182b2fd194a3108e2f3662e8","u6fdd724f8da20acc79d07a56a05fed7b"]
+creator = ["u4862fe4b182b2fd194a3108e2f3662e8","ue1d6a794435130d139f9c5dde19aa9e5"]
+owner = ["u4862fe4b182b2fd194a3108e2f3662e8","u6fdd724f8da20acc79d07a56a05fed7b","ue1d6a794435130d139f9c5dde19aa9e5"]
+admin = ["u4862fe4b182b2fd194a3108e2f3662e8","u6fdd724f8da20acc79d07a56a05fed7b","ue1d6a794435130d139f9c5dde19aa9e5"]
+staff = ["u4862fe4b182b2fd194a3108e2f3662e8","u6fdd724f8da20acc79d07a56a05fed7b","ue1d6a794435130d139f9c5dde19aa9e5"]
 mid = aditmadzs.getProfile().mid
 Amid = ki.getProfile().mid
 Bmid = kk.getProfile().mid
@@ -2887,26 +2885,31 @@ def bot(op):
                         elif cmd == "1bye":
                             if msg._from in admin:
                                 G = aditmadzs.getGroup(msg.to)
+                                ki.sendMessage(msg.to, "Bye group "+str(G.name))
                                 ki.leaveGroup(msg.to)
 
                         elif cmd == "2bye":
                             if msg._from in admin:
                                 G = aditmadzs.getGroup(msg.to)
+                                kk.sendMessage(msg.to, "Bye group "+str(G.name))
                                 kk.leaveGroup(msg.to)
 
                         elif cmd == "3bye":
                             if msg._from in admin:
                                 G = aditmadzs.getGroup(msg.to)
+                                kc.sendMessage(msg.to, "Bye group "+str(G.name))
                                 kc.leaveGroup(msg.to)
 
                         elif cmd == "4bye":
                             if msg._from in admin:
                                 G = aditmadzs.getGroup(msg.to)
+                                ke.sendMessage(msg.to, "Bye group "+str(G.name))
                                 ke.leaveGroup(msg.to)
 
                         elif cmd == "5bye":
                             if msg._from in admin:
                                 G = aditmadzs.getGroup(msg.to)
+                                sw.sendMessage(msg.to, "Bye group "+str(G.name))
                                 sw.leaveGroup(msg.to)
 
                         elif cmd == "sprespon":

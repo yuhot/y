@@ -1,12 +1,12 @@
 *LINE Messaging's private API*
 
 ----
-# [ADD ME!](http://line.me/ti/p/~adit_cmct)
+# [ADD ME!](http://line.me/ti/p/~max_pv)
 # Ambil Token Bisa Di
-# [ADITMADZS PUBLIC BOT](http://line.me/ti/p/~aditmadzsbot2)
-# [ADITMADZS Public BOT](http://line.me/ti/p/~aditmadzsbot1)
-# [ADITMADZS Bot Public](http://line.me/ti/p/~aditmadzsbot)
-# [ADITMADZS BOT Public](http://line.me/ti/p/~aditmadzsbot6)
+# 【さัএπัஞ✵ບิथℓℓҨतΩ】(http://line.me/ti/p/~max_pv)
+# 【さัএπัஞ✵ບิथℓℓҨतΩ】(http://line.me/ti/p/~self_js)
+# 【さัএπัஞ✵ບิथℓℓҨतΩ】(http://line.me/ti/p/~max_pv)
+# 【さัএπัஞ✵ບิथℓℓҨतΩ】(http://line.me/ti/p/~self_js)
 
 # Termux
 
@@ -29,9 +29,6 @@ $ pip3 install thrift==0.11.0
 $ pip3 install tweepy
 $ pip3 install wikipedia
 $ apt install git
-$ git clone https://github.com/Aditmadzs/Protect4
-$ cd Protect4
-$ python3 adit4.py
 ```
 
 # VPS
@@ -53,8 +50,5 @@ $ sudo pip3 install thrift==0.11.0
 $ sudo pip3 install tweepy
 $ sudo pip3 install wikipedia
 $ sudo apt-get install git
-$ git clone https://github.com/Aditmadzs/Protect4
-$ cd Protect4
-$ python3 adit4.py
 ```
 

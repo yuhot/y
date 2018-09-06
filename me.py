@@ -21,45 +21,44 @@ ki.log("Auth Token : " + str(ki.authToken))
 channel1 = LineChannel(ki)
 ki.log("Channel Access Token : " + str(channel1.channelAccessToken))
 
-kk = LineClient()
-#kk = LineClient(authToken='TOKEN LU')
-kk.log("Auth Token : " + str(kk.authToken))
-channel2 = LineChannel(kk)
-kk.log("Channel Access Token : " + str(channel2.channelAccessToken))
+#kk = LineClient()
+#kk = LineClient(authToken='TOKEN LU')@kk.log("Auth Token : " + str(kk.authToken))
+#channel2 = LineChannel(kk)
+#kk.log("Channel Access Token : " + str(channel2.channelAccessToken))
 
-kc = LineClient()
+#kc = LineClient()
 #kc = LineClient(authToken='TOKEN LU')
-kc.log("Auth Token : " + str(kc.authToken))
-channel3 = LineChannel(kc)
-kc.log("Channel Access Token : " + str(channel3.channelAccessToken))
+#kc.log("Auth Token : " + str(kc.authToken))
+#channel3 = LineChannel(kc)
+#kc.log("Channel Access Token : " + str(channel3.channelAccessToken))
 
-ke = LineClient()
+#ke = LineClient()
 #ke = LineClient(authToken='TOKEN LU')
-ke.log("Auth Token : " + str(ke.authToken))
-channel3 = LineChannel(ke)
-ke.log("Channel Access Token : " + str(channel3.channelAccessToken))
+#ke.log("Auth Token : " + str(ke.authToken))
+#channel3 = LineChannel(ke)
+#ke.log("Channel Access Token : " + str(channel3.channelAccessToken))
 
-sw = LineClient()
+#sw = LineClient()
 #sw = LineClient(authToken='TOKEN LU')
-sw.log("Auth Token : " + str(sw.authToken))
-channel1 = LineChannel(ke)
-sw.log("Channel Access Token : " + str(channel3.channelAccessToken))
+#sw.log("Auth Token : " + str(sw.authToken))
+#channel1 = LineChannel(ke)
+#sw.log("Channel Access Token : " + str(channel3.channelAccessToken))
 
 poll = LinePoll(aditmadzs)
 call = aditmadzs
-creator = ["u4862fe4b182b2fd194a3108e2f3662e8","ue1d6a794435130d139f9c5dde19aa9e5"]
-owner = ["u4862fe4b182b2fd194a3108e2f3662e8","u6fdd724f8da20acc79d07a56a05fed7b","ue1d6a794435130d139f9c5dde19aa9e5"]
-admin = ["u4862fe4b182b2fd194a3108e2f3662e8","u6fdd724f8da20acc79d07a56a05fed7b","ue1d6a794435130d139f9c5dde19aa9e5"]
-staff = ["u4862fe4b182b2fd194a3108e2f3662e8","u6fdd724f8da20acc79d07a56a05fed7b","ue1d6a794435130d139f9c5dde19aa9e5"]
+creator = ["ud3511dd6ed90c47f33234c30640a3bc9","u035aafb7ea8b39252b2488563efc79bf"]
+owner = ["ud3511dd6ed90c47f33234c30640a3bc9","u035aafb7ea8b39252b2488563efc79bf"]
+admin = ["ud3511dd6ed90c47f33234c30640a3bc9","u035aafb7ea8b39252b2488563efc79bf"]
+staff = ["ud3511dd6ed90c47f33234c30640a3bc9","u035aafb7ea8b39252b2488563efc79bf"]
 mid = aditmadzs.getProfile().mid
 Amid = ki.getProfile().mid
-Bmid = kk.getProfile().mid
-Cmid = kc.getProfile().mid
-Dmid = ke.getProfile().mid
-Zmid = sw.getProfile().mid
-KAC = [aditmadzs,ki,kk,kc,ke]
-ABC = [ki,kk,kc,ke]
-Bots = [mid,Amid,Bmid,Cmid,Dmid,Zmid]
+#Bmid = kk.getProfile().mid
+#Cmid = kc.getProfile().mid
+#Dmid = ke.getProfile().mid
+#Zmid = sw.getProfile().mid
+#KAC = [aditmadzs,ki,kk,kc,ke]
+ABC = [ki]
+Bots = [mid,Amid]
 Madzs = admin + staff
 
 protectqr = []
@@ -82,9 +81,9 @@ myProfile["statusMessage"] = MadzsProfile.statusMessage
 myProfile["pictureStatus"] = MadzsProfile.pictureStatus
 
 responsename1 = ki.getProfile().displayName
-responsename2 = kk.getProfile().displayName
-responsename3 = kc.getProfile().displayName
-responsename4 = ke.getProfile().displayName
+#responsename2 = kk.getProfile().displayName
+#responsename3 = kc.getProfile().displayName
+#responsename4 = ke.getProfile().displayName
 
 cctv = {
     "cyduk":{},

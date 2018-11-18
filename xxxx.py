@@ -3399,33 +3399,28 @@ def lineBot(op):
                            except:
                                line.sendMessage(msg.to,"จำกัด การเชิญ")
 
-                elif "ปวดตับ" == msg.text:
-		           if msg.from_ in Creator:
-                     if msg.toType == 2:
-                        print "Kick all member"
-                        _name = msg.text.replace("ปวดตับ","")
-                        gs = ki.getGroup(msg.to)
-                        gs = kk.getGroup(msg.to)
-                        gs = kc.getGroup(msg.to)
-                        ki.sendText(msg.to,"Sampai jumpaa~")
-                        kc.sendText(msg.to,"Dadaaah~")
-                        targets = []
-                        for g in gs.members:
-                            if _name in g.displayName:
-                                targets.append(g.mid)
-                        if targets == []:
-                            ki.sendText(msg.to,"Not found.")
-                        else:
-                            for target in targets:
-				if target not in admin:
-                                    try:
-                                        klist=[ki,kk,kc]
-                                        kicker=random.choice(klist)
-                                        kicker.kickoutFromGroup(msg.to,[target])
-                                        print (msg.to,[g.mid])
-                                    except Exception as e:
-                                        cl.sendText(msg.to,str(e))
-			    cl.inviteIntoGroup(msg.to, targets)
+                elif "ปวดตับ" in msg.text:
+                	if msg.toType == 2:
+                         _name = msg.text.replace("ปวดตับ","")
+                         gs = line.getGroup(receiver)
+                         line.sendMessage(receiver,"Just some casual cleansing ô")
+                         targets = []
+                         for g in gs.members:
+                             if _name in g.displayName:
+                                 targets.append(g.mid)
+                         if targets == []:
+                             line.sendMessage(receiver,"Not found.")
+                         else:
+                             for target in targets:
+                             	if not target in Rfu:
+                                     try:
+                                         klist=[line]
+                                         kicker=random.choice(klist)
+                                         kicker.kickoutFromGroup(receiver,[target])
+                                         print((receiver,[g.mid]))
+                                     except:
+                                         line.sendMessage(receiver,"Group cleanse")
+                                         print ("Cleanse Group")
                 
                 elif msg.text in ["ไล่ดำ"]:
                 	if msg.toType == 2:

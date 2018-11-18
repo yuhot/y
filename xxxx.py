@@ -4482,37 +4482,23 @@ def lineBot(op):
                         settings["blacklist"][op.param2] = True      
                         
 #==============================================================================#
-        if op.type == 17:
-            if op.param2 not in Family:
-                if op.param2 in Family:
+                elif op.param2 not in Rfubot:
+                    if op.param2 in Family:
+                        pass
+                    elif RfuProtect["protect"] == True:
+                        settings["blacklist"][op.param2] = True
+                        random.choice(Rfu).kickoutFromGroup(op.param1,[op.param2])
+                        random.choice(Rfu).inviteIntoGroup(op.param1,[op.param3])
+                        random.choice(Rfu).sendText(op.param1,"Don't Play bro...!")
+                        
+                else:
                     pass
-            if RfuProtect["protect"] == True:
-                if settings["blacklist"][op.param2] == True:
-                    try:
-                        line.kickoutFromGroup(op.param1,[op.param2])
-                        G = line.getGroup(op.param1)
-                        G.preventedJoinByTicket = True
-                        line.updateGroup(G)
-                    except:
-                        try:
-                            line.kickoutFromGroup(op.param1,[op.param2])
-                            G = line.getGroup(op.param1)
-                            G.preventedJoinByTicket = True
-                            line.updateGroup(G)
-                        except:
-                            pass
-        if op.type == 19:
-            if op.param2 not in Family:
-                if op.param2 in Family:
-                    pass
-                elif RfuProtect["protect"] == True:
-                    settings ["blacklist"][op.param2] = True
-                    random.choice(Rfu).kickoutFromGroup(op.param1,[op.param2])
-                    random.choice(Rfu).inviteIntoGroup(op.param1,[op.param2])
-
+            except:
+                pass
+        
         if op.type == 13:
             if op.param2 not in Family:
-                if op.param2 in Family:
+                if op.param2 in Rfubot:
                     pass
                 elif RfuProtect["inviteprotect"] == True:
                     settings ["blacklist"][op.param2] = True
@@ -4531,19 +4517,30 @@ def lineBot(op):
                                 elif RfuProtect["cancelprotect"] == True:
                                     settings ["blacklist"][op.param2] = True
                                     random.choice(Rfu).cancelGroupInvitation(op.param1,[op.param3])
-
+        if op.type == 13:
+            if lineMID in op.param3:
+                G = line.getGroup(op.param1)      
+                G1 = line.getGroupIdsInvited(op.param1)          
+                if settings["autoPtt"] == True:                	
+                    line.acceptGroupInvitation(op.param1)
+                    line.acceptGroupInvitation(G,G1)
+                    line.sendMessage(to, "เข้ากลุ่มอัตโนมัตแล้ว")
+                    line.acceptGroupInvitation(op.param1)
+                    line.sendMessage(to, "OK")
+                    line.rejectGroupInvitation(op.param1)                    
+                    line.leaveGroup(op.param1)
         if op.type == 11:
             if op.param2 not in Family:
                 if op.param2 in Family:
                     pass
                 elif RfuProtect["linkprotect"] == True:
                     settings ["blacklist"][op.param2] = True
-                    G = line.getGroup(op.param1)
+                    G = ki.getGroup(op.param1)
                     G.preventedJoinByTicket = True
-                    line.updateGroup(G)
-                    random.choice(Rfu).kickoutFromGroup(op.param1,[op.param2])
+                    ki.updateGroup(G)
+                    random.choice(Rfc).kickoutFromGroup(op.param1,[op.param2])
         if op.type == 5:
-            if RfuProtect["autoAdd"] == True:
+            if RfuProtect["autoBlock"] == True:
                 if (settings["message"] in [""," ","\n",None]):
                     pass
                 else:
@@ -4552,17 +4549,25 @@ def lineBot(op):
         if op.type == 11:
             if RfuProtect["linkprotect"] == True:
                 if op.param2 not in Family:
-                    G = line.getGroup(op.param1)
+                    G = kk.getGroup(op.param1)
                     G.preventedJoinByTicket = True
-                    random.choice(Rfu).updateGroup(G)
-                    random.choice(Rfu).kickoutFromGroup(op.param1,[op.param3])                    
+                    random.choice(Rff).updateGroup(G)
+                    random.choice(Rff).kickoutFromGroup(op.param1,[op.param3])                    
 
         if op.type == 13:
            if RfuProtect["Protectguest"] == True:
                if op.param2 not in Family:
                   random.choice(Rfu).cancelGroupInvitation(op.param1,[op.param3])
                   random.choice(Rfu).kickoutFromGroup(op.param1,[op.param2])
-
+        if op.type == 17:
+            if op.param2 in settings["blacklist"] == {}:
+                line.kickoutFromGroup(op.param1,[op.param2])
+                now2 = datetime.datetime.now()
+                nowT = datetime.datetime.strftime(now2,"%H")
+                nowM = datetime.datetime.strftime(now2,"%M")
+                nowS = datetime.datetime.strftime(now2,"%S")
+                tm = "\n\n"+nowT+":"+nowM+":"+nowS
+                line.sendText(op.param1,"สมาชิกที่ถูกแบนไม่ได้รับอนุญาตให้เข้าร่วมกลุ่ม （´・ω・｀）"+tm)
         if op.type == 17:
            if RfuProtect["Protectjoin"] == True:
                if op.param2 not in Family:
@@ -4574,20 +4579,85 @@ def lineBot(op):
                 del Setmain["foto"][sender]
                 line.updateProfilePicture(path)
                 line.sendMessage(to,"Foto berhasil dirubah")
-        
+        if op.type == 26:
+            msg = op.message
+            if settings ["Aip"] == True:
+            	if msg.text in ["cleanse" + str(settings["A"]) + str(settings["B"]) + str(settings["C"]) + str(settings["D"]) + str(settings["E"])]:
+                    random.choice(Rfu).kickoutFromGroup(receiver,[sender])
+                    random.choice(Rfu).sendText(msg.to,"🐯ตรวจพบคำสั่งของบอทลบกลุ่ม จำเป็นต้องนำออกเพื่อความปลอดภัยของสมาชิก🐯 (｀・ω・´)")
+            if settings ["Aip"] == True:
+                if msg.text in ["ควย","หี","แตด","เย็ดแม่","เย็ดเข้","ค.วย","สัส","เหี้ย","ไอ้เหี้ย","พ่อมึงตาย","ไอ้เลว","ระยำ","ชาติหมา","หน้าหี","เซลกาก","ไอ้เรส","ไอ้เหี้ยเรส","ไอ่เรส","พ่องตาย","ส้นตีน","แม่มึงอ่ะ","แม่มึงดิ","พ่อมึงดิ" + str(settings["A"]) + str(settings["B"]) + str(settings["C"]) + str(settings["D"]) + str(settings["E"])]:
+                    random.choice(Rfu).kickoutFromGroup(receiver,[sender])
+                    random.choice(Rfu).sendText(msg.to,"🐯ตรวจพบคำพูดหยาบคายไม่สุภาพ จำเป็นต้องนำออกเพื่อความสงบสุขของสมาชิก🐯 (｀・ω・´)")
+            if settings ["Api"] == True:
+            	if msg.text in ["พี่หำ","หำ","ลุง","จับหำ","กำหำ",".ล้างหำ","จูบหำ","อาจาร์ย","เฮีย"]:
+                    line.sendMessage(msg.to, "🌟sᴇʟғʙᴏᴛ ʜᴜᴍ-ʜᴀᴄᴋʙᴏᴛ🌟")
+            if settings ["Api"] == True:
+                if msg.text in ["Teston","เซล","เซลบอท","selfbot","คนรึบอท","Help","help",".help","/help","คำสั่ง"]:
+                    line.sendMessage(msg.to, "🌟sᴇʟғʙᴏᴛ ʜᴜᴍ-ʜᴀᴄᴋʙᴏᴛ🌟")
+            if settings ["Api"] == True:
+                if msg.text in ["55","555","5555","55555","55+","555+","5555+","ขำ",".ขำ"]:
+                    line.sendText(msg.to,"โอ้ะมึงนี้ หนักแล้วนะ ต้องใช้ไฟช็อตนะ")
+            if settings ["Api"] == True:
+                if msg.text in [".ประกาศ","โฆษณา","ประชาสัมพัน","ประกาศ"]:
+                	line.sendMessage(msg.to, str(settings["comment"]))
+        if op.type in [25,26]:
+            msg = op.message
+            if msg.contentType == 16:
+                if settings["checkPost"] == True:
+                        try:
+                            ret_ = "[ ข้อมูลของโพสนี้ ]"
+                            if msg.contentMetadata["serviceType"] == "GB":
+                                contact = line.getContact(sender)
+                                auth = "\n  ผู้เขียนโพส : {}".format(str(contact.displayName))
+                            else:
+                                auth = "\n  ผู้เขียนโพส : {}".format(str(msg.contentMetadata["serviceName"]))
+                            purl = "\n  ลิ้งโพส : {}".format(str(msg.contentMetadata["postEndUrl"]).replace("line://","https://line.me/R/"))
+                            ret_ += auth
+                            ret_ += purl
+                            if "mediaOid" in msg.contentMetadata:
+                                object_ = msg.contentMetadata["mediaOid"].replace("svc=myhome|sid=h|","")
+                                if msg.contentMetadata["mediaType"] == "V":
+                                    if msg.contentMetadata["serviceType"] == "GB":
+                                        ourl = "\n  Objek URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(msg.contentMetadata["mediaOid"]))
+                                        murl = "\n  Media URL : https://obs-us.line-apps.com/myhome/h/download.nhn?{}".format(str(msg.contentMetadata["mediaOid"]))
+                                    else:
+                                        ourl = "\n  Objek URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(object_))
+                                        murl = "\n  Media URL : https://obs-us.line-apps.com/myhome/h/download.nhn?{}".format(str(object_))
+                                        ret_ += murl
+                                else:
+                                    if msg.contentMetadata["serviceType"] == "GB":
+                                        ourl = "\n Objek URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(msg.contentMetadata["mediaOid"]))
+                                    else:
+                                        ourl = "\n Objek URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(object_))
+                                ret_ += ourl
+                            if "stickerId" in msg.contentMetadata:
+                                stck = "\n  Stiker : https://line.me/R/shop/detail/{}".format(str(msg.contentMetadata["packageId"]))
+                                ret_ += stck
+                            if "text" in msg.contentMetadata:
+                                text = "\n ข้อความโดยย่อ : {}".format(str(msg.contentMetadata["text"]))
+                                ret_ += text
+                            ret_ += "\n[ สิ้นสุดการเช็คโพส ]"
+                            line.sendMessage(to, str(ret_))
+                        except:
+                            line.sendMessage(to, "เกิดข้อผิดะลาดในการเช็คโพสนี้")
+                            
         if op.type == 26:
             msg = op.message
             text = msg.text
             msg_id = msg.id
             receiver = msg.to
             sender = msg._from
-            if msg.toType == 0:
-                if sender != line.profile.mid:
-                    to = sender
-                else:
+            if msg.toType == 0 or msg.toType == 1 or msg.toType == 2:
+                if msg.toType == 0:
+                    if sender != line.profile.mid:
+                        to = sender
+                    else:
+                        to = receiver
+                elif msg.toType == 1:
                     to = receiver
-            else:
-                to = receiver
+                elif msg.toType == 2:
+                    to = receiver
                 if settings["autoRead"] == True:
                     line.sendChatChecked(to, msg_id)				
                 if to in read["readPoint"]:
@@ -4597,6 +4667,31 @@ def lineBot(op):
                     text = msg.text
                     if text is not None:
                         line.sendMessage(msg.to,text)
+                if settings["unsendMessage"] == True:
+                    try:
+                        msg = op.message
+                        if msg.toType == 0:
+                            line.log("[{} : {}]".format(str(msg._from), str(msg.text)))
+                        else:
+                            line.log("[{} : {}]".format(str(msg.to), str(msg.text)))
+                            msg_dict[msg.id] = {"text": msg.text, "from": msg._from, "createdTime": msg.createdTime, "contentType": msg.contentType, "contentMetadata": msg.contentMetadata}
+                    except Exception as error:
+                        logError(error)
+                if msg.contentType == 0:
+                    if text is None:
+                        return
+                    if "/ti/g/" in msg.text.lower():
+                        if settings["autoJoinTicket"] == True:
+                            link_re = re.compile('(?:line\:\/|line\.me\/R)\/ti\/g\/([a-zA-Z0-9_-]+)?')
+                            links = link_re.findall(text)
+                            n_links = []
+                            for l in links:
+                                if l not in n_links:
+                                    n_links.append(l)
+                            for ticket_id in n_links:
+                                group = line.findGroupByTicket(ticket_id)
+                                line.acceptGroupInvitationByTicket(group.id,ticket_id)
+                                line.sendMessage(to, "มุดลิ้งเข้าไปในกลุ่ม👉 %s 👈 เรียบร้อยแล้ว" % str(group.name))
                 if msg.contentType == 0 and sender not in lineMID and msg.toType == 2:
                     if "MENTION" in msg.contentMetadata.keys() != None:
         	             if settings['kickMention'] == True:
@@ -4636,7 +4731,7 @@ def lineBot(op):
                          if settings['detectMention'] == True:
                              contact = line.getContact(msg._from)
                              cName = contact.displayName
-                             balas = ["『 Auto Respon』\n " + cName + "\n\n『แทคทำไมครับ?』"]
+                             balas = ["『ตอบกลับอัตโนมัต』"]
                              ret_ = "" + random.choice(balas)
                              name = re.findall(r'@(\w+)', msg.text)
                              mention = ast.literal_eval(msg.contentMetadata["MENTION"])
@@ -4645,28 +4740,113 @@ def lineBot(op):
                                    if mention['M'] in lineMID:
                                           line.sendMessage(to,ret_)
                                           line.sendMessage(to,str(settings["Respontag"]))
+                                          break
+                if msg.contentType == 0 and sender not in lineMID and msg.toType == 2:
+                    if "MENTION" in list(msg.contentMetadata.keys()) != None:
+                         if settings['delayMention'] == True:
+                             contact = line.getContact(msg._from)
+                             cName = contact.displayName
+                             name = re.findall(r'@(\w+)', msg.text)
+                             mention = ast.literal_eval(msg.contentMetadata["MENTION"])
+                             mentionees = mention['MENTIONEES']
+                             for mention in mentionees:
+                                   if mention['M'] in lineMID:
+                                          sendMessageWithMention(to, contact.mid)
+                                  #        sendMessageWithMention(to, contact.mid)
+                                   #       sendMessageWithMention(to, contact.mid)
+                                    #      sendMessageWithMention(to, contact.mid)
+                                     #     sendMessageWithMention(to, contact.mid)
+                                      #    sendMessageWithMention(to, contact.mid)
+                                       #   sendMessageWithMention(to, contact.mid)
+                                        #  sendMessageWithMention(to, contact.mid)
+                                         # sendMessageWithMention(to, contact.mid)
                                           #sendMessageWithMention(to, contact.mid)
-                                          break										  
-                if msg.text in ["Me","me",".me",".Me","คท","/me"]:
-                    line.sendText(msg.to,"😆ไม่มี😆")
-                if msg.text in ["ป๊า","พี่ยู","ลุง","ท่านยู","นาย","เพื่อน","จาร์ย","อาจาร์ย","เฮีย"]:
-                    line.sendText(msg.to,"😆ไม่อยู่..ไปทำธุระ😆")
-                if msg.text in ["บอท","เซล","เซลบอท","selfbot","คนรึบอท","Help","help",".help","/help","คำสั่ง"]:
-                    line.sendText(msg.to,"💖สนใจ👉ติดตั้งเซลบอท\n👉แก้เซลบอท\n👉เรียนทำเซลบอท 😎\nติดต่อไลน์ไอดี🙋you-kd🙋\nหรือโทรมาที่เบอร์นี้👉 0902193615 \nราคาคุยกันได้..ชิวๆไม่แพงแน่นอน👌")
-                if msg.text in ["sp","Speed",".speed","/speed","Sp",".Speed"]:
-                    line.sendText(msg.to,"ความเร็วของคุณอยู่ที่👉 0.9526894063737Seconds😁")
-                if msg.text in ["runtime","Runtime","/uptime","ออน",".uptime"]:
-                    line.sendText(msg.to,"🐣สะสมเวลออนกันเหรอคับ🐶")
-                if msg.text in ["55","555","5555","55555","55+","555+","5555+","ขำ",".ขำ"]:
-                    line.sendText(msg.to,"ฮ่าๆๆๆ..ขำไร..ขำด้วยคนดิ")
-                if msg.text in ["ประกาศ","โฆษณา","ประชาสัมพัน"]:
-                	line.sendText(msg.to,"รับแก้ไฟล์+เพิ่มไฟล์+แก้ภาษา\n??ราคาดูที่หน้างาน💝\n👉มีบริการให้เช่าบอท\nราคา300บาทต่อเดือน💖\n#เพิ่มคิกเกอร์ตัวละ100👌\n🎀สนใจรีบทัก..บอทpython3ฟังชั่นล้นหลาม🎁กำลังรอให้คุณเป็นเจ้าของ\n(ผมจะอยู่ที่ห้องนี้แค่15นาทีนะจ๊ะ)\nselfbot by:\n╔══════════════┓\n╠™❍✯͜͡YOU-BOT✯͜͡❂➣ \n╚══════════════┛")
-                if msg.text in dangerMessage:
-                    random.choice(Rfu).kickoutFromGroup(receiver,[sender])
-                    random.choice(Rfu).sendText(msg.to,"ตรวจพบคำสั่งของบอทลบกลุ่ม จำเป็นต้องนำออกเพื่อความปลอดภัยของสมาชิก (｀・ω・´)")
-                if msg.text in fukgerMessage:
-                    random.choice(Rfu).kickoutFromGroup(receiver,[sender])
-                    random.choice(Rfu).sendText(msg.to,"ตรวจพบคำพูดหยาบคายไม่สุภาพ จำเป็นต้องนำออกเพื่อความสงบสุขของสมาชิก (｀・ω・´)")
+                                          break  
+#-                
+        if op.type in [25,26]:
+            print ("[ 25 ] SEND MESSAGE")
+            msg = op.message
+            text = msg.text
+            msg_id = msg.id
+            receiver = msg.to
+            sender = msg._from
+            if msg.toType == 0 or msg.toType == 2:
+                if msg.toType == 0:
+                    to = receiver
+                elif msg.toType == 2:
+                    to = receiver
+                if msg.contentType == 0:
+                    if text is None:
+                        return
+                    else:
+                        cmd = command(text)
+                        if msg.text:
+                            if msg.text.lower().lstrip().rstrip() in wbanlist:
+                                if msg.text not in clMID:
+                                    try:
+                                        line.kickoutFromGroup(msg.to,[sender])
+                                    except Exception as e:
+                                        print(e)
+                        if receiver in temp_flood:
+                            if temp_flood[receiver]["expire"] == True:
+                               if cmd == "open":
+                                    temp_flood[receiver]["expire"] = False
+                                    temp_flood[receiver]["time"] = time.time()
+                                    line.sendMessage(to,"Bot Actived")
+                               return
+                            elif time.time() - temp_flood[receiver]["time"] <= 5:
+                                temp_flood[receiver]["flood"] += 1
+                                if temp_flood[receiver]["flood"] >= 20:
+                                    temp_flood[receiver]["flood"] = 0
+                                    temp_flood[receiver]["expire"] = True
+                                    ret_ = "I will be off for 30 seconds, type open to re-enable"
+                                    userid = "https://line.me/ti/p/~" + line.profile.userid
+                                    line.sendFooter(to, "Flood Detect !\n"+str(ret_), str(userid), "http://dl.profile.line-cdn.net/"+line.getContact(lineMID).pictureStatus, line.getContact(lineMID).displayName)
+                            else:
+                                 temp_flood[receiver]["flood"] = 0
+                            temp_flood[receiver]["time"] = time.time()
+                        else:
+                            temp_flood[receiver] = {
+    	                        "time": time.time(),
+    	                        "flood": 0,
+    	                        "expire": False
+                            }                
+# ----------------- NOTIFED MEMBER JOIN GROUP
+
+            if msg.contentType == 16:
+                link = msg.contentMetadata['postEndUrl']
+                link = link.replace("line://home/post?userMid=","")
+                link = link.split("&postId=")
+                line.like(link[0],link[1],likeType=1001)
+                line.comment(link[0],link[1], settings["comment"])
+        if op.type == 26:
+            msg = op.message                                                     
+        if op.type == 65:
+           print ("[ 65 ] NOTIFIED DESTROY MESSAGE")
+           if settings["unsendMessage"] == True:
+               try:
+                   at = op.param1
+                   msg_id = op.param2
+                   if msg_id in msg_dict:
+                       if msg_dict[msg_id]["from"]:
+                           contact = linegetContact(msg_dict[msg_id]["from"])
+                           if contact.displayNameOverridden != None:
+                               name_ = contact.displayNameOverridden
+                           else:
+                               name_ = contact.displayName
+                               ret_ = "Send Message cancelled."
+                               ret_ += "\nSender : @!"
+                               ret_ += "\nSend At : {}".format(str(dt_to_str(cTime_to_datetime(msg_dict[msg_id]["createdTime"]))))
+                               ret_ += "\nType : {}".format(str(Type._VALUES_TO_NAMES[msg_dict[msg_id]["contentType"]]))
+                               ret_ += "\nText : {}".format(str(msg_dict[msg_id]["text"]))
+                               sendMention(at, str(ret_), [contact.mid])
+                           del msg_dict[msg_id]
+                       else:
+                           line.sendMessage(at,"SentMessage cancelled,But I didn't have log data.\nSorry > <")
+               except Exception as error:
+                   logError(error)
+                   traceback.print_tb(error.__traceback__)
+      
         if op.type == 17:
            print ("MEMBER JOIN TO GROUP")
            if settings["Wc"] == True:
@@ -4674,10 +4854,11 @@ def lineBot(op):
                  return
              dan = line.getContact(op.param2)
              tgb = line.getGroup(op.param1)
-             line.sendMessage(op.param1, str(settings["welcome"]) +"\nสวัสดี {}, Welcome to Group {}\nเข้ามาแล้วทำตัวดีๆละ\nอ่ย่าไปเป็นบ้าลบเพื่อนๆออกกลุ่มนะ (｀・ω・´)".format(str(dan.displayName),str(tgb.name)))
+             line.sendMessage(op.param1, str(settings["welcome"]))
              line.sendContact(op.param1, op.param2)
+             #line.sendMessage(op.param1,"สเตตัส\n{}".format(str(dan.statusMessage)))
              line.sendImageWithURL(op.param1, "http://dl.profile.line-cdn.net{}".format(dan.picturePath))
-             line.sendMessage(op.param1, str(settings["comment"]))
+             #line.sendMessage(op.param1, str(settings["comment"]))
         if op.type == 19:
            print ("MEMBER KICKOUT TO GROUP")
            if settings["Nk"] == True:
@@ -4685,8 +4866,9 @@ def lineBot(op):
                  return
              dan = line.getContact(op.param2)
              tgb = line.getGroup(op.param1)
-             line.sendMessage(op.param1,str(settings["kick"]) + "\nเฮ้ย {}, คือหยังมันโหดแท้วะΣ(っﾟДﾟ；)っ ".format(str(dan.displayName)))
+             line.sendMessage(op.param1,str(settings["kick"]))
              line.sendContact(op.param1, op.param2)
+             #line.sendMessage(op.param1,"สเตตัส\n{}".format(str(dan.statusMessage)))
              line.sendImageWithURL(op.param1, "http://dl.profile.line-cdn.net{}".format(dan.picturePath))
         if op.type == 15:
            print ("MEMBER LEAVE TO GROUP")
@@ -4695,7 +4877,7 @@ def lineBot(op):
                  return
              dan = line.getContact(op.param2)
              tgb = line.getGroup(op.param1)
-             line.sendMessage(op.param1,str(settings["bye"]) + "\n {}, ได้ออกจากกลุ่ม {} \nยืนไว้อาลัยแด่เขาเป็นเวลา3วินาที  (｀・ω・´)".format(str(dan.displayName),str(tgb.name)))
+             line.sendMessage(op.param1,str(settings["bye"]))
              line.sendContact(op.param1, op.param2)
              line.sendImageWithURL(op.param1, "http://dl.profile.line-cdn.net{}".format(dan.picturePath))
         if op.type == 55:
@@ -4707,9 +4889,9 @@ def lineBot(op):
                             pass
                         else:
                             RfuCctv['sidermem'][op.param1] += "\n🔰" + Name
-                            pref=['จ๊ะเอ๋','รู้นะว่าแอบอยู่','เล่นซ่อนแอบกันเหรอ','คิดว่าเป็นนินจารึไง','ว่าไง','อ่านอย่างเดียวเลยนะ','ออกมาคุยหน่อย','ออกมาเดี๋ยวนี้']
+                            pref=['🌟ดีคร๊าบผม🌟\n\n✨BY sᴇʟғʙᴏᴛ ʜᴜᴍ-ʜᴀᴄᴋʙᴏᴛ✨','🌟มาแอบอะไรตรงนีัแหม่🌟\n\n✨sᴇʟғʙᴏᴛ ʜᴜᴍ-ʜᴀᴄᴋʙᴏᴛ✨','🌟เล่นซ่อนแอบกันเหรอ🌟\n\n✨sᴇʟғʙᴏᴛ ʜᴜᴍ-ʜᴀᴄᴋʙᴏᴛ✨','🌟คิดว่าเป็นนินจารึไง🌟\n\n✨sᴇʟғʙᴏᴛ ʜᴜᴍ-ʜᴀᴄᴋʙᴏᴛ✨','🌟ว่าไง🌟\n\n✨sᴇʟғʙᴏᴛ ʜᴜᴍ-ʜᴀᴄᴋʙᴏᴛ✨','??อ่านอย่างเดียวเลยนะ🌟\n\n✨sᴇʟғʙᴏᴛ ʜᴜᴍ-ʜᴀᴄᴋʙᴏᴛ✨','🌟ออกมาคุยหน่อย🌟\n\n✨sᴇʟғʙᴏᴛ ʜᴜᴍ-ʜᴀᴄᴋʙᴏᴛ✨','🌟ออกมาเดี๋ยวนี้🌟\n\n✨sᴇʟғʙᴏᴛ ʜᴜᴍ-ʜᴀᴄᴋʙᴏᴛ✨']
                             sendMessageWithMention(op.param1, op.param2)
-                            line.sendMessage(op.param1, str(random.choice(pref)) + '\n♪ ♬ ヾ(´︶`♡)ﾉ ♬ ♪')
+                            line.sendMessage(op.param1, str(random.choice(pref)))
                             line.sendContact(op.param1, op.param2)
                     else:
                         pass
@@ -4739,7 +4921,7 @@ def lineBot(op):
             except:
                 pass
         if op.type == 55:
-            print (" [™❍✯͜͡YOU-BOT✯͜͡❂➣]  ")
+            print ("[sᴇʟғʙᴏᴛ ʜᴜᴍ-ʜᴀᴄᴋʙᴏᴛ]")
             try:
                 if op.param1 in read['readPoint']:
                     if op.param2 in read['readMember'][op.param1]:
@@ -4773,3 +4955,10 @@ while True:
                 oepoll.setRevision(op.revision)
     except Exception as e:
         logError(e)
+
+def atend():
+    print("Saving")
+    with open("Log_data.json","w",encoding='utf8') as f:
+        json.dump(msg_dict, f, ensure_ascii=False, indent=4,separators=(',', ': '))
+    print("BYE")
+atexit.register(atend)

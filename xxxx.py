@@ -3400,7 +3400,7 @@ def lineBot(op):
                                line.sendMessage(msg.to,"จำกัด การเชิญ")
 
                 elif "ปวดตับ" == msg.text:
-		    if msg.from_ in Creator:
+		           if msg.from_ in Creator:
                      if msg.toType == 2:
                         print "Kick all member"
                         _name = msg.text.replace("ปวดตับ","")

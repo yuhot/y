@@ -6,7 +6,7 @@ from datetime import datetime
 from time import sleep
 from bs4 import BeautifulSoup
 from humanfriendly import format_timespan, format_size, format_number, format_length
-import time, random, sys, json, codecs, threading, glob, re, string, os, requests, subprocess, six, ast, pytz, urllib.request, urllib.parse, urllib.error, urllib.parse,antolib,subprocess,unicodedata,GACSender
+import time, random, sys, json, codecs, threading, glob, re, string, os, requests, subprocess, six, ast, pytz, urllib.request, urllib.parse, urllib.error, urllib.parse
 from gtts import gTTS
 from googletrans import Translator
 #==============================================================================#
@@ -60,9 +60,7 @@ readOpen = codecs.open("read.json","r","utf-8")
 settingsOpen = codecs.open("temp.json","r","utf-8")
 read = json.load(readOpen)
 settings = json.load(settingsOpen)
-Rfu = [line,ki]
-Rfc = [ki]
-Exc = [ki]
+Rfu = [line]
 lineMID = line.getProfile().mid
 kiMID = ki.getProfile().mid
 #kkMID = kk.getProfile().mid
@@ -70,8 +68,8 @@ kiMID = ki.getProfile().mid
 bot1 = line.getProfile().mid
 RfuBot=[lineMID,kiMID]
 RfuBot=[lineMID]
-Family=["u06779df38010e6e1509ca0499acaa501",lineMID]
-admin=['u06779df38010e6e1509ca0499acaa501',lineMID]
+Family=["u37c6d68f4ec4fdbf43e4e70eb9b28e65",lineMID]
+admin=['u37c6d68f4ec4fdbf43e4e70eb9b28e65',lineMID]
 RfuFamily = RfuBot + Family
 
 protectname = []
@@ -847,7 +845,7 @@ def lineBot(op):
                     line.sendContact(to, lineMID)
                 elif text.lower() == 'ผู้สร้าง':
                     sendMessageWithMention(to, lineMID)
-                    line.sendContact(to, "u06779df38010e6e1509ca0499acaa50")
+                    line.sendContact(to, "u37c6d68f4ec4fdbf43e4e70eb9b28e65")
                 elif text.lower() == 'ไอดี':
                     line.sendMessage(msg.to,"[MID]\n" +  lineMID)
                 elif text.lower() == 'คอมเม้น':
